@@ -17,7 +17,7 @@ use App\Models\Usuario;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 
