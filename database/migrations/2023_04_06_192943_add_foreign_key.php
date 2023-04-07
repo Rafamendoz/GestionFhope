@@ -11,19 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('puesto', function (Blueprint $table) {
-            $table->id();
-            $table->string('puesto_nombre');
-            $table->integer('estado');
-            $table->timestamps();
+        Schema::table('colaborador', function (Blueprint $table){
+
+            $table->foreign('colaborador_idusuario')->references('id')->on('usuario')->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 
     /**
-     * Reverse the migrations
+     * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('puesto');
+        //
     }
 };

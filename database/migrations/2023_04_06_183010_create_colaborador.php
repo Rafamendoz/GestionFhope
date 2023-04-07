@@ -16,14 +16,10 @@ return new class extends Migration
             $table->string('colaborador_nombres');
             $table->string('colaborador_apellidos');
             $table->string('colaborador_DNI');
-            $table->integer('colaborador_puesto');
-            $table->integer('colaborador_idusuario');
+            $table->unsignedBigInteger('colaborador_puesto');
+            $table->unsignedBigInteger('colaborador_idusuario');
             $table->integer('estado');
             $table->timestamps();
-            $table->foreignId('colaborador_puesto')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
         });
     }
 

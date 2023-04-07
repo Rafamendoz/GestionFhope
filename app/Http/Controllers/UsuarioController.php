@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
@@ -9,10 +10,15 @@ use App\Models\Usuario;
 class UsuarioController extends Controller
 {
     public function getUsuario(){
-    return response()->json(Usuario::all(),200);
+        $data = Usuario::all();
+        return view('usuarios', compact('data'));
+    
    }
 
-   public function getUsuarioById($id){
-    return response()->json(Usuario::find($id),200);
-   }
+
+
+
+  
+
+   
 }
