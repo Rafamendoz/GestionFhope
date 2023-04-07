@@ -154,6 +154,8 @@ return [
     |
     */
 
+    
+
     'providers' => [
 
         /*
@@ -212,4 +214,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+];
+
+[
+    'api_key' => env('API_KEY'),
 ];
