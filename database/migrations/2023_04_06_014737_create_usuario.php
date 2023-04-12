@@ -21,6 +21,15 @@ return new class extends Migration
             $table->unsignedBigInteger('confirmacion');
             $table->timestamps();
         });
+
+        Schema::create('token', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_usuario');
+            $table->string('token');
+            $table->datetime('ultimoTokenSolicitado');
+            $table->unsignedBigInteger('estado');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -29,5 +38,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('usuario');
+        Schema::dropIfExists('token');
     }
 };
