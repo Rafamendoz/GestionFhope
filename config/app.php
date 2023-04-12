@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -218,4 +218,10 @@ return [
 
 [
     'api_key' => env('API_KEY'),
+];
+
+
+[
+    'log' => env('API_LOG','single'),
+    'log_level' => env('APP_LOG_LEVEL', 'debug')    
 ];

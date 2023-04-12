@@ -45,23 +45,29 @@ class UsuarioController extends Controller
         }
 
 
-    public function saveUsuario(Request $request){
+    public function setUsuario(Request $request){
         $usuario = Usuario::create($request->all());
-        return response()->json(["Estado"=>"Exito"], 202);
+        return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
 
     }
 
-    public function updateUsuario(Request $request, $id){
+    public function putUsuario(Request $request, $id){
         $usuario = Usuario::find($id);
         if(is_null($usuario)){
-            return response()->json(["Estado"=>'Fallido', "Descripcion:"=>"No se actualizo el registro solicitado, ya que no existe"], 404);
+            return response()->json(["Codigo"=>"412","Estado"=>'Fallido', "Descripcion:"=>"No se actualizo el registro solicitado, ya que no existe"], 412);
         }else{
             $usuario->update($request->all());
-            return response()->json(["Estado"=>"Exito", "Descripcion:"=>"Registro Actualizado"], 202);
+            return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Actualizado"], 202);
         }
     
 
     }
+
+
+   
+
+
+
 
     public function deleteUsuario(Request $request,$id){
         $usuario = Usuario::find($id);

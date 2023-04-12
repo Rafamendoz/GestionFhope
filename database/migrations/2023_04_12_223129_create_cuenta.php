@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('colaborador', function (Blueprint $table){
-            $table->foreign('colaborador_puesto')->references('id')->on('puesto');
+        Schema::create('cuenta', function (Blueprint $table) {
+            $table->id();
+            $table->string('cuenta_nombre');
+            $table->unsignedBigInteger('estado');
+            $table->timestamps();
         });
     }
 
@@ -21,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('cuenta');
     }
 };

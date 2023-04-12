@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('user');
             $table->integer('intentos');
-            $table->integer('estado');
+            $table->unsignedBigInteger('estado');
+            $table->unsignedBigInteger('confirmacion');
             $table->timestamps();
         });
     }

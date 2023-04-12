@@ -28,9 +28,9 @@ Route::get('usuarioR', 'App\Http\Controllers\UsuarioController@getUsuarioRest');
  /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
 Route::get('usuarioR/{id}', 'App\Http\Controllers\UsuarioController@getUsuarioRestById');
  /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
-Route::post('usuarioR/add', 'App\Http\Controllers\UsuarioController@saveUsuario');
+Route::post('usuarioR/add', 'App\Http\Controllers\UsuarioController@setUsuario');
  /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
-Route::put('usuarioR/update/{id}', 'App\Http\Controllers\UsuarioController@updateUsuario');
+Route::put('usuarioR/update/{id}', 'App\Http\Controllers\UsuarioController@putUsuario');
  /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
 Route::put('usuarioR/delete/{id}', 'App\Http\Controllers\UsuarioController@deleteUsuario');
 

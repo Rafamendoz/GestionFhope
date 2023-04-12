@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('colaborador', function (Blueprint $table){
-
-            $table->foreign('colaborador_idusuario')->references('id')->on('usuario')->onUpdate('cascade')
-            ->onDelete('cascade');
+        Schema::create('estado', function (Blueprint $table) {
+            $table->id();
+            $table->string('valor');
+            $table->timestamps();
         });
+
+        
     }
 
     /**
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('estado');
     }
 };

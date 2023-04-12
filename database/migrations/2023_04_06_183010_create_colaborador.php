@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('colaborador_DNI');
             $table->unsignedBigInteger('colaborador_puesto');
             $table->unsignedBigInteger('colaborador_idusuario');
-            $table->integer('estado');
+            $table->unsignedBigInteger('estado');
             $table->timestamps();
         });
     }
