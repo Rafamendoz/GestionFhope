@@ -36,3 +36,38 @@ Route::put('usuarioR/delete/{id}', 'App\Http\Controllers\UsuarioController@delet
 
 });
 
+
+//RUTAS PARA ENTIDAD Colaborador
+Route::group(["middleware" => "apikey.validate"], function () {
+    /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
+   Route::get('colaborador', 'App\Http\Controllers\ColaboradorController@getColaborador');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('colaboradorR', 'App\Http\Controllers\ColaboradorController@getColaboradoresRest');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('colaboradorR/{id}', 'App\Http\Controllers\ColaboradorController@getColaboradorRestById');
+    /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+   Route::post('colaboradorR/add', 'App\Http\Controllers\ColaboradorController@setColaborador');
+    /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+   Route::put('colaboradorR/update/{id}', 'App\Http\Controllers\ColaboradorController@putColaborador');
+    /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+   Route::put('colaboradorR/delete/{id}', 'App\Http\Controllers\ColaboradorController@deleteColaborador');
+   
+   });
+
+//RUTAS PARA ENTIDAD Estado
+Route::group(["middleware" => "apikey.validate"], function () {
+    /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
+   Route::get('estado', 'App\Http\Controllers\EstadoController@getEstado');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('estadoR', 'App\Http\Controllers\EstadoController@getEstadosRest');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('estadoR/{id}', 'App\Http\Controllers\EstadoController@getEstadoRestById');
+    /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+   Route::post('estadoR/add', 'App\Http\Controllers\EstadoController@setEstado');
+    /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+   Route::put('estadoR/update/{id}', 'App\Http\Controllers\EstadoController@putEstado');
+    /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+   Route::delete('estadoR/delete/{id}', 'App\Http\Controllers\EstadoController@deleteEstado');
+   
+   });
+

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Colaborador extends Model
 {
+    public $table = "colaborador";
     public $timestamp = true;
     protected $fillable = ['id', 'colaborador_nombres', 'colaborador_apellidos', 'colaborador_DNI', 'colaborador_puesto', 'colaborador_idusuario', 'estado'];
 }
