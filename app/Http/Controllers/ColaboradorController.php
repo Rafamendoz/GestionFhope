@@ -10,7 +10,7 @@ class ColaboradorController extends Controller
 {
     public function setColaborador(Request $request){
         $colaborador = Colaborador::create($request->all());
-        return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
+        return response()->json(["Colaborador"=>$colaborador,"Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
 
     }
 
@@ -28,18 +28,21 @@ class ColaboradorController extends Controller
     }
 
     public function getColaboradorRestById($id){
-        $colaborador = Colaborador::find($id)->where('estado',1);;
-        return response()->json(["Colaborador"=>$colaborador,"Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Obtenido"], 202);
+        $colaborador = Colaborador::all()->where('id',$id)->where('estado',1);
+        if(sizeof($colaborador)===0){
+            return response()->json(["Colaborador"=>$colaborador,"Codigo"=>"202","Estado"=>"Fallido", "Descripcion:"=>"Registro No Encontrado"], 404);
+
+        }else{
+            return response()->json(["Colaborador"=>$colaborador,"Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Obtenido"], 202);
+        }
 
 
     }
 
     public function putColaborador(Request $request,$id){
-        $colaborador = Colaborador::find($id)->where('estado',1);;
+        $colaborador = Colaborador::find($id);
         $colaborador->update($request->all());
         return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Actualizado"], 202);
-
-
     }
 
     public function deleteColaborador(Request $request,$id){

@@ -20,6 +20,8 @@ class UsuarioController extends Controller
     
    }
 
+
+
    public function getUsuarioRest(){
     $data = Usuario::all()->where('estado',1);
    
@@ -33,7 +35,7 @@ class UsuarioController extends Controller
     }
 
     public function getUsuarioRestById($id){
-        $data = Usuario::all()->where('id',$id)->where('estado',1);
+        $data = Usuario::all()->where('user',$id)->where('estado',1);
        
         if(is_null($data) || sizeof($data)<1){
             return response()->json(["Estado"=>'Fallido', "Descripcion:"=>"No se encontro el registro solicitado"], 404);
@@ -84,6 +86,13 @@ class UsuarioController extends Controller
            
         }
     
+
+    }
+
+    public function validarCredenciales($user){
+     $response = Http::accept('application/json')->get('http://localhost:8000/api/usuarioR/edwin.espino');
+       echo $response->body();
+
 
     }
 

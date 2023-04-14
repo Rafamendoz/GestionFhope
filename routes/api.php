@@ -54,6 +54,20 @@ Route::group(["middleware" => "apikey.validate"], function () {
    
    });
 
+
+   Route::get('moneda', 'App\Http\Controllers\MonedaController@getMoneda');
+   /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+  Route::get('monedaR', 'App\Http\Controllers\MonedaController@getMonedasRest');
+   /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+  Route::get('monedaR/{id}', 'App\Http\Controllers\MonedaController@getMonedaRestById');
+   /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+  Route::post('monedaR/add', 'App\Http\Controllers\MonedaController@setMoneda');
+   /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+  Route::put('monedaR/update/{id}', 'App\Http\Controllers\MonedaController@putMoneda');
+   /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+  Route::put('monedaR/delete/{id}', 'App\Http\Controllers\MonedaController@deleteMoneda');
+  
+
 //RUTAS PARA ENTIDAD Estado
 Route::group(["middleware" => "apikey.validate"], function () {
     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
@@ -70,4 +84,23 @@ Route::group(["middleware" => "apikey.validate"], function () {
    Route::delete('estadoR/delete/{id}', 'App\Http\Controllers\EstadoController@deleteEstado');
    
    });
+
+
+   //RUTAS PARA ENTIDAD Puesto
+Route::group(["middleware" => "apikey.validate"], function () {
+    /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
+   Route::get('puesto', 'App\Http\Controllers\PuestoController@getPuesto');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('puestoR', 'App\Http\Controllers\PuestoController@getEstadosRest');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('puestoR/{id}', 'App\Http\Controllers\PuestoController@getEstadoRestById');
+    /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+   Route::post('puestoR/add', 'App\Http\Controllers\PuestoController@setPuesto');
+    /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+   Route::put('puestoR/update/{id}', 'App\Http\Controllers\PuestoController@putEstado');
+    /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+   Route::delete('puestoR/delete/{id}', 'App\Http\Controllers\PuestoController@deleteEstado');
+   
+   });
+
 

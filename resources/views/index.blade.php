@@ -59,7 +59,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a onclick="loggin();" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
                                         <hr>
@@ -98,7 +98,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="build/js/sb-admin-2.min.js"></script>
-
+    <script>
+        function loggin(){
+            
+            fetch('http://localhost:8000/api/usuarioR/test.test?api_key=key_cur_prod_fnPqT5xQEi5Vcb9wKwbCf65c3BjVGyBB').then(response=>response.json())
+            .then(json=>console.log(json));
+        }
+    </script>
 </body>
 
 </html>

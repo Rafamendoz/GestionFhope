@@ -29,6 +29,7 @@ Route::get('/admin', function () {
 });
 
 
+Route::get('/login/{id}', 'App\Http\Controllers\UsuarioController@validarCredenciales');
 
 
 

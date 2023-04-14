@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Puesto extends Model
 {
+   public $table = 'puesto';
    public $timestamps = true;
-   protected $filliable = ['id', 'puesto_nombre', 'estado'];
+   protected $fillable = ['id', 'puesto_nombre', 'estado'];
 }
