@@ -34,6 +34,8 @@ Route::put('usuarioR/update/{id}', 'App\Http\Controllers\UsuarioController@putUs
  /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
 Route::put('usuarioR/delete/{id}', 'App\Http\Controllers\UsuarioController@deleteUsuario');
 
+Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@logginUsuario');
+
 });
 
 

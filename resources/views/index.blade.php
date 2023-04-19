@@ -100,9 +100,24 @@
     <script src="build/js/sb-admin-2.min.js"></script>
     <script>
         function loggin(){
+            let user = new FormData();
+            user.append('user','test.test')
+            user.append('password','test123456')
+            fetch('http://localhost:8000/api/usuarioR/loggin/validate?api_key=key_cur_prod_fnPqT5xQEi5Vcb9wKwbCf65c3BjVGyBB',{
+                method:"Post",
+                body: user
+            }).then(response=>response.json())
+            .then(json=>{
+                if(json.Valor==="1"){
+                    console.log(json.Valor);
+                    location.replace('http://localhost:8000/admin');
+                }else{
+                    console.log(json);
+
+                }
+            }
+                );
             
-            fetch('http://localhost:8000/api/usuarioR/test.test?api_key=key_cur_prod_fnPqT5xQEi5Vcb9wKwbCf65c3BjVGyBB').then(response=>response.json())
-            .then(json=>console.log(json));
         }
     </script>
 </body>

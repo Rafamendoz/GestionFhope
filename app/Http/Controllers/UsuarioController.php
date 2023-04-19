@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Crypt;
 
 
 class UsuarioController extends Controller
@@ -48,7 +49,9 @@ class UsuarioController extends Controller
 
 
     public function setUsuario(Request $request){
-        $usuario = Usuario::create($request->all());
+        $contra = Crypt::encryptString($request->password);
+        $user =  Crypt::encryptString($request->user);
+        $usuario = Usuario::insert(['email'=>$request->email,'password'=>$contra,'user'=>$user,'intentos'=>$request->intentos,'estado'=>$request->estado,'confirmacion'=>$request->confirmacion]);
         return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
 
     }
@@ -89,12 +92,15 @@ class UsuarioController extends Controller
 
     }
 
-    public function validarCredenciales($user){
-     $response = Http::accept('application/json')->get('http://localhost:8000/api/usuarioR/edwin.espino');
-       echo $response->body();
-
-
+    public function logginUsuario(Request $request){
+        $usuario = Usuario::where('user',$request->user)->get();
+        if($usuario[0]->user === $request->user &&  $usuario[0]->password=== $request->password){
+            return response()->json(["Valor"=>"1","Estado"=>"Exito"], 202);
+        }else{
+            return response()->json(["Valor"=>"0","Estado"=>"Fallo"], 202);
+        }
     }
+
 
 
   
