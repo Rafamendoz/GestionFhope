@@ -105,4 +105,15 @@ Route::group(["middleware" => "apikey.validate"], function () {
    
    });
 
+   Route::get('cuentaR', 'App\Http\Controllers\CuentaController@getCuentasRest');
+   Route::get('cuentaR/{id}', 'App\Http\Controllers\CuentaController@getCuentaRestById');
+   Route::post('cuentaR/add', 'App\Http\Controllers\CuentaController@setCuenta');
+   Route::put('cuentaR/update/{id}', 'App\Http\Controllers\CuentaController@putCuenta');
+   Route::put('cuentaR/delete/{id}', 'App\Http\Controllers\CuentaController@deleteCuenta');
+
+   Route::get('transaccionR', 'App\Http\Controllers\TransaccionController@getTransaccionesRest');
+   Route::get('transaccionR/{id}', 'App\Http\Controllers\TransaccionController@getTransaccionRestById');
+   Route::post('transaccionR/add', 'App\Http\Controllers\TransaccionController@setTransaccion');
+   Route::put('transaccionR/update/{id}', 'App\Http\Controllers\TransaccionController@putTransaccion');
+   Route::put('transaccionR/delete/{id}', 'App\Http\Controllers\TransaccionController@deleteTransaccion');
 

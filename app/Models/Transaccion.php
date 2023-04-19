@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaccion extends Model
 {
-    use HasFactory;
+    public $table = 'transaccion';
+    public $timestamp = 'true';
+    protected $fillable = ['id','trans_nombre','estado'];
 }

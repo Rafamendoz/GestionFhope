@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cuenta extends Model
 {
-    use HasFactory;
+    public $table = "cuenta";
+   public $timestamps = true;
+   protected $fillable = ['id', 'cuenta_nombre', 'estado'];
 }
