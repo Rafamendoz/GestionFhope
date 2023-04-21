@@ -93,27 +93,35 @@ Route::group(["middleware" => "apikey.validate"], function () {
     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
    Route::get('puesto', 'App\Http\Controllers\PuestoController@getPuesto');
     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
-   Route::get('puestoR', 'App\Http\Controllers\PuestoController@getEstadosRest');
+   Route::get('puestoR', 'App\Http\Controllers\PuestoController@getPuestosRest');
     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
-   Route::get('puestoR/{id}', 'App\Http\Controllers\PuestoController@getEstadoRestById');
+   Route::get('puestoR/{id}', 'App\Http\Controllers\PuestoController@getPuestoRestById');
     /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
    Route::post('puestoR/add', 'App\Http\Controllers\PuestoController@setPuesto');
     /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
-   Route::put('puestoR/update/{id}', 'App\Http\Controllers\PuestoController@putEstado');
+   Route::put('puestoR/update/{id}', 'App\Http\Controllers\PuestoController@putPuesto');
     /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
-   Route::delete('puestoR/delete/{id}', 'App\Http\Controllers\PuestoController@deleteEstado');
+   Route::put('puestoR/delete/{id}', 'App\Http\Controllers\PuestoController@deletePuesto');
    
    });
 
+      //RUTAS PARA ENTIDAD Cuenta
    Route::get('cuentaR', 'App\Http\Controllers\CuentaController@getCuentasRest');
    Route::get('cuentaR/{id}', 'App\Http\Controllers\CuentaController@getCuentaRestById');
    Route::post('cuentaR/add', 'App\Http\Controllers\CuentaController@setCuenta');
    Route::put('cuentaR/update/{id}', 'App\Http\Controllers\CuentaController@putCuenta');
    Route::put('cuentaR/delete/{id}', 'App\Http\Controllers\CuentaController@deleteCuenta');
 
+      //RUTAS PARA ENTIDAD Transaccion
    Route::get('transaccionR', 'App\Http\Controllers\TransaccionController@getTransaccionesRest');
    Route::get('transaccionR/{id}', 'App\Http\Controllers\TransaccionController@getTransaccionRestById');
    Route::post('transaccionR/add', 'App\Http\Controllers\TransaccionController@setTransaccion');
    Route::put('transaccionR/update/{id}', 'App\Http\Controllers\TransaccionController@putTransaccion');
    Route::put('transaccionR/delete/{id}', 'App\Http\Controllers\TransaccionController@deleteTransaccion');
 
+   //RUTAS PARA ENTIDAD Banco
+   Route::get('bancoR', 'App\Http\Controllers\BancoController@getBancosRest');
+   Route::get('bancoR/{id}', 'App\Http\Controllers\BancoController@getBancoRestById');
+   Route::post('bancoR/add', 'App\Http\Controllers\BancoController@setBanco');
+   Route::put('bancoR/update/{id}', 'App\Http\Controllers\BancoController@putBanco');
+   Route::put('bancoR/delete/{id}', 'App\Http\Controllers\BancoController@deleteBanco');

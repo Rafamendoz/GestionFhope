@@ -1,0 +1,28 @@
+PLANTILLA DE RESPONSE:
+
+METODO SET
+return response()->json(["Transacciones"=>$transacciones,"Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
+
+METODO GET
+
+ return response()->json([
+            "Transaccion"=>$transaccion, 
+            "Codigo"=>"202",
+            "Estado"=>"Exitoso"
+        ], 202);
+
+METODO PUT
+ return response()->json(
+            ["Transaccion"=>$transaccion
+            ,"Codigo"=>"200",
+            "Estado"=>"Exitoso",
+            "Descripcion"=>"Registro Modificado"
+            ]
+        );
+
+METODO DELETE
+ACTIVO
+                    return response()->json(["Estado"=>"Exito", "Descripcion:"=>"Registro Activado"], 202);
+DESACTIVADO
+                    return response()->json(["Estado"=>"Exito", "Descripcion:"=>"Registro Desactivado"], 202);
+
