@@ -125,3 +125,17 @@ Route::group(["middleware" => "apikey.validate"], function () {
    Route::post('bancoR/add', 'App\Http\Controllers\BancoController@setBanco');
    Route::put('bancoR/update/{id}', 'App\Http\Controllers\BancoController@putBanco');
    Route::put('bancoR/delete/{id}', 'App\Http\Controllers\BancoController@deleteBanco');
+
+   //RUTAS PARA ENTIDAD DetalleBanco
+   Route::get('dbancoR', 'App\Http\Controllers\DetalleBancoController@getDetallesBancoRest');
+   Route::get('dbancoR/{id}', 'App\Http\Controllers\DetalleBancoController@getDetalleBancoRestById');
+   Route::post('dbancoR/add', 'App\Http\Controllers\DetalleBancoController@setDetalleBanco');
+   Route::post('dbancoR/transaccion/{id}', 'App\Http\Controllers\DetalleBancoController@getDetalleBancoRestByTipoTransaccion');
+
+    //RUTAS PARA ENTIDAD Token
+    Route::get('tokenR', 'App\Http\Controllers\DetalleBancoController@getDetallesBancoRest');
+    Route::get('tokenR/{id}', 'App\Http\Controllers\DetalleBancoController@getDetalleBancoRestById');
+    Route::post('tokenR/add', 'App\Http\Controllers\DetalleBancoController@setDetalleBanco');
+  
+  
+

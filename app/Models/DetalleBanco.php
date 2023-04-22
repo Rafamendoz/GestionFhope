@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetalleBanco extends Model
 {
-    use HasFactory;
+    protected $table = 'detallebanco';
+    protected $fillable = ['id','id_banco','id_tipoTransaccion','monto','descripcion', 'estado'];
+    public $timestamp = true;
 }
