@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Puesto;
 use App\Models\Estado;
+use App\Models\Error;
+
+
 use Illuminate\Support\Facades\Log;
 
 
@@ -30,9 +33,10 @@ class PuestoController extends Controller
            $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"]], 200);
            Log::info("RESPONSE: ".$response);
            return $response;
-        } catch (\Throwable $th) {
-            Log::error("Mensaje de error: {$th->getMessage()} "."Codigo de Error: {$th->getCode()}");
-            return response()->json(["Estado"=>"Fallido","Codigo"=>500, "CodigoAplicacion"=>$th->getCode()],500);
+        } catch (\Illuminate\Database\QueryException $th) {
+            Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
+            $error = Error::where('codigo_error',$th->getCode())->where( )->get();
+            return response()->json(["Estado"=>"Fallido","Codigo"=>500, "Mapping_Error"=>$error],500);
         }
     }
 

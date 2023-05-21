@@ -64,7 +64,7 @@
 <script>
 
     function Guardar(){
-        let puesto_nombre = $("#nombrePuesto").val();
+        let puesto_nombre = $("#nombrePuesto").val().toUpperCase();
         let estado = $("#estado").val();
 
       
