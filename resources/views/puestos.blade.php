@@ -19,7 +19,7 @@
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <h7 class=" font-weight-bold text-primary">Add</h6>
-                            <button class="btn btn-primary btn-md" type="button"><i class="fas fa-plus"></i></button>
+                            <a class="btn btn-primary btn-md" href="{{route('AddPuesto')}}"><i class="fas fa-plus"></i></a>
                             </div>
                         </div>
 
@@ -65,3 +65,4 @@
 
         
 @endsection
+

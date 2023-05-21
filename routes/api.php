@@ -41,7 +41,7 @@ Route::put('usuarioR/delete/{id}', 'App\Http\Controllers\UsuarioController@delet
 Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@logginUsuario');
 
 //RUTAS PARA ENTIDAD Colaborador
-Route::group(["middleware" => "apikey.validate"], function () {
+
     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
    Route::get('colaborador', 'App\Http\Controllers\ColaboradorController@getColaborador');
     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
@@ -55,7 +55,6 @@ Route::group(["middleware" => "apikey.validate"], function () {
     /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
    Route::put('colaboradorR/delete/{id}', 'App\Http\Controllers\ColaboradorController@deleteColaborador');
    
-   });
 
 
    Route::get('moneda', 'App\Http\Controllers\MonedaController@getMoneda');
@@ -72,7 +71,7 @@ Route::group(["middleware" => "apikey.validate"], function () {
   
 
 //RUTAS PARA ENTIDAD Estado
-Route::group(["middleware" => "apikey.validate"], function () {
+
     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
    Route::get('estado', 'App\Http\Controllers\EstadoController@getEstado');
     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
@@ -86,11 +85,11 @@ Route::group(["middleware" => "apikey.validate"], function () {
     /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
    Route::delete('estadoR/delete/{id}', 'App\Http\Controllers\EstadoController@deleteEstado');
    
-   });
+ 
 
 
    //RUTAS PARA ENTIDAD Puesto
-Route::group(["middleware" => "apikey.validate"], function () {
+
     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
    Route::get('puesto', 'App\Http\Controllers\PuestoController@getPuesto');
     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
@@ -104,8 +103,7 @@ Route::group(["middleware" => "apikey.validate"], function () {
     /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
    Route::put('puestoR/delete/{id}', 'App\Http\Controllers\PuestoController@deletePuesto');
    
-   });
-
+ 
       //RUTAS PARA ENTIDAD Cuenta
    Route::get('cuentaR', 'App\Http\Controllers\CuentaController@getCuentasRest');
    Route::get('cuentaR/{id}', 'App\Http\Controllers\CuentaController@getCuentaRestById');

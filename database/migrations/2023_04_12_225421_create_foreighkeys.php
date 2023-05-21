@@ -56,6 +56,12 @@ return new class extends Migration
 
         });
 
+        Schema::table('puesto', function (Blueprint $table) {
+         
+            $table->foreign('estado')->references('id')->on('estado')->onDelete('Cascade')->onUpdate('Cascade');
+
+        });
+
     }
 
     /**
