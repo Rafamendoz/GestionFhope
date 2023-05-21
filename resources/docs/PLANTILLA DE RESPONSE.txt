@@ -26,3 +26,6 @@ ACTIVO
 DESACTIVADO
                     return response()->json(["Estado"=>"Exito", "Descripcion:"=>"Registro Desactivado"], 202);
 
+\\HNBNSVRFSCUMP2\Files_FC
+
+/opt/rh/eap7/fcm_all/engines/vwatch-deploy-cli/bin/Sanctions_Lists

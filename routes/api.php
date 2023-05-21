@@ -22,7 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //RUTAS PARA ENTIDAD USUARIO
 Route::group(["middleware" => "apikey.validate"], function () {
  /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
-Route::get('usuarios', 'App\Http\Controllers\UsuarioController@getUsuario');
+
+
+});
+
+
  /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
 Route::get('usuarioR', 'App\Http\Controllers\UsuarioController@getUsuarioRest');
  /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
@@ -35,9 +39,6 @@ Route::put('usuarioR/update/{id}', 'App\Http\Controllers\UsuarioController@putUs
 Route::put('usuarioR/delete/{id}', 'App\Http\Controllers\UsuarioController@deleteUsuario');
 
 Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@logginUsuario');
-
-});
-
 
 //RUTAS PARA ENTIDAD Colaborador
 Route::group(["middleware" => "apikey.validate"], function () {

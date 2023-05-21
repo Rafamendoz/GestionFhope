@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 
 
 class UsuarioController extends Controller
 {
     public function getUsuario(){
-        $data = Usuario::all()->where('estado',1);
+        $data = User::all()->where('estado',1);
         if(sizeof($data)===0){
             $data=array();
             return view('usuarios', compact('data'));
@@ -24,7 +24,7 @@ class UsuarioController extends Controller
 
 
    public function getUsuarioRest(){
-    $data = Usuario::all()->where('estado',1);
+    $data = User::all()->where('estado',1);
    
     if(is_null($data) || sizeof($data)<1){
         return response()->json(["Estado"=>'Fallido', "Descripcion:"=>"No se encontraron los registros solicitado"], 404);
@@ -36,7 +36,7 @@ class UsuarioController extends Controller
     }
 
     public function getUsuarioRestById($id){
-        $data = Usuario::all()->where('user',$id)->where('estado',1);
+        $data = User::all()->where('user',$id)->where('estado',1);
        
         if(is_null($data) || sizeof($data)<1){
             return response()->json(["Estado"=>'Fallido', "Descripcion:"=>"No se encontro el registro solicitado"], 404);
@@ -51,13 +51,13 @@ class UsuarioController extends Controller
     public function setUsuario(Request $request){
         $contra = Crypt::encryptString($request->password);
         $user =  Crypt::encryptString($request->user);
-        $usuario = Usuario::insert(['email'=>$request->email,'password'=>$contra,'user'=>$user,'intentos'=>$request->intentos,'estado'=>$request->estado,'confirmacion'=>$request->confirmacion]);
+        $usuario = User::insert(['email'=>$request->email,'password'=>$contra,'user'=>$user,'intentos'=>$request->intentos,'estado'=>$request->estado,'confirmacion'=>$request->confirmacion]);
         return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
 
     }
 
     public function putUsuario(Request $request, $id){
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         if(is_null($usuario)){
             return response()->json(["Codigo"=>"412","Estado"=>'Fallido', "Descripcion:"=>"No se actualizo el registro solicitado, ya que no existe"], 412);
         }else{
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
 
 
     public function deleteUsuario(Request $request,$id){
-        $usuario = Usuario::find($id);
+        $usuario = User::find($id);
         if(is_null($usuario)){
             return response()->json(["Estado"=>'Fallido', "Descripcion:"=>"No se desactivo el registro solicitado, ya que no existe"], 404);
         }else{
@@ -93,7 +93,7 @@ class UsuarioController extends Controller
     }
 
     public function logginUsuario(Request $request){
-        $usuario = Usuario::where('user',$request->user)->get();
+        $usuario = User::where('user',$request->user)->get();
         if($usuario[0]->user === $request->user &&  $usuario[0]->password=== $request->password){
             return response()->json(["Valor"=>"1","Estado"=>"Exito"], 202);
         }else{

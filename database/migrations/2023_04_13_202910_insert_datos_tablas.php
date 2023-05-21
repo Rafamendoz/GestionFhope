@@ -16,8 +16,8 @@ return new class extends Migration
             ['valor' => 'Inactivo']]
         );
 
-        DB::table('usuario')->insert([
-            ['email'=>'test_fhope@gmail.com','password'=>'test123456','user'=>'test.test','intentos'=>'3', 'confirmacion'=>'0','estado'=>'1']
+        DB::table('users')->insert([
+            ['email'=>'test_fhope@gmail.com','password'=>'test123456','user'=>'test.test','intentos'=>'3','estado'=>'1']
             ]
         );
     }

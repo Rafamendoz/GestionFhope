@@ -26,15 +26,8 @@ return new class extends Migration
 
         });
 
-        Schema::table('usuario', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
          
-            $table->foreign('estado')->references('id')->on('estado')->onDelete('Cascade')->onUpdate('Cascade');
-
-        });
-
-        Schema::table('token', function (Blueprint $table) {
-         
-            $table->foreign('id_usuario')->references('id')->on('usuario')->onDelete('Cascade')->onUpdate('Cascade');
             $table->foreign('estado')->references('id')->on('estado')->onDelete('Cascade')->onUpdate('Cascade');
 
         });
@@ -50,7 +43,7 @@ return new class extends Migration
         Schema::table('venta', function (Blueprint $table) {
          
             $table->foreign('cliente_id')->references('id')->on('cliente')->onDelete('Cascade')->onUpdate('Cascade');
-            $table->foreign('usuario_id')->references('id')->on('usuario')->onDelete('Cascade')->onUpdate('Cascade');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('Cascade')->onUpdate('Cascade');
             $table->foreign('estado')->references('id')->on('estado')->onDelete('Cascade')->onUpdate('Cascade');
 
         });

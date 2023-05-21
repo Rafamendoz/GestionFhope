@@ -37,3 +37,11 @@ Route::get('/login/{id}', 'App\Http\Controllers\UsuarioController@validarCredenc
 Route::get('/productos', function () {
     return view('productos');
 });
+
+//CRUD PUESTO//
+Route::get('puestos', 'App\Http\Controllers\PuestoController@getPuestos')->name('Puestos');
+Route::get('puestos/addpuesto', 'App\Http\Controllers\PuestoController@addPuesto')->name('AddPuesto');
+
+
+//CRUD USUARIO//
+Route::get('usuarios', 'App\Http\Controllers\UsuarioController@getUsuario')->name('Usuarios');

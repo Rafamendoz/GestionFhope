@@ -1,0 +1,62 @@
+@extends('panelp')
+
+
+@section('tablabase')
+ <!-- Page Heading -->
+
+ <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Puestos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear Puesto</li>
+  </ol>
+</nav>
+ <h1 class="h3 mb-2 text-gray-800">Puestos</h1>
+
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <h5 class=" font-weight-bold text-primary">Data de Puestos</h5>
+                            </div>
+                         
+                        </div>
+
+                        <div class="card-body">
+                            <form>
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre del Puesto:</label>
+                                    <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail3">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Estado del Puesto:</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                            <label class="input-group-text" for="inputGroupSelect01">Opciones</label>
+                                        </div>
+                                        <select class="custom-select" id="inputGroupSelect01">
+                                            <option selected>Seleccione un estado...</option>
+                                            @foreach ($estados as $estado )
+                                                <option value="{{$estado->id}}">{{$estado->valor}}</option>
+                                            @endforeach
+                                          
+                                        </select>
+                                    </div>
+
+                                
+                                    </div>
+
+                                </div>
+                           
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+        
+@endsection
