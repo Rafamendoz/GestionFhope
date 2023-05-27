@@ -151,4 +151,19 @@ Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@
    /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
   Route::put('clienteR/delete/{id}', 'App\Http\Controllers\ClienteController@deleteCliente');
 
+      //RUTAS PARA ENTIDAD PRODUCTO
+     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
+     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+    Route::get('productoR', 'App\Http\Controllers\ProductoController@getProductosRest');
+     /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+    Route::get('productoR/{id}', 'App\Http\Controllers\ProductoController@getProductoRestById');
+     /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+    Route::post('productoR/add', 'App\Http\Controllers\ProductoController@setProducto');
+     /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+    Route::put('productoR/update/{id}', 'App\Http\Controllers\ProductoController@putProducto');
+     /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+    Route::put('productoR/delete/{id}', 'App\Http\Controllers\ProductoController@deleteProducto');
+  
+  
+
 

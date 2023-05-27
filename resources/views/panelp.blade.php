@@ -68,8 +68,8 @@
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" href="buttons.html">Resumen Ventas</a>
                         <a class="collapse-item" href="cards.html">POS</a>
-                        <a class="collapse-item" href="cards.html">Clientes</a>
-                        <a class="collapse-item" href="cards.html">Productos</a>
+                        <a class="collapse-item" href="{{route('Clientes')}}">Clientes</a>
+                        <a class="collapse-item" href="{{route('Productos')}}">Productos</a>
 
                     </div>
                 </div>
