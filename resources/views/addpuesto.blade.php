@@ -76,11 +76,12 @@
         .done(function( data ) {
             let response = JSON.parse(JSON.stringify(data));
             console.log(response);
-            /*mostrarMensaje(response['Data_Respuesta'])*/
+            mostrarMensaje(response['Data_Respuesta'])
         
         }).fail(function(data){
             let response = JSON.parse(JSON.stringify(data));
             console.log(response);
+            mostrarMensaje(response['responseJSON']);
 
         });
     }
@@ -110,12 +111,12 @@
         if(dataResponse.Codigo==200){
                 Toast.fire({
             icon: 'success',
-            title: 'Signed in successfully'
+            title: dataResponse.Estado + "! " + dataResponse.Descripcion 
             })
         }else{
             Toast.fire({
             icon: 'error',
-            title: "Error"
+            title: dataResponse.Estado + "! " + dataResponse.Mapping_Error[0].descripcion 
         })}
        
 

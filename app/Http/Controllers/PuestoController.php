@@ -16,8 +16,15 @@ use Illuminate\Support\Facades\Log;
 class PuestoController extends Controller
 {
     public function getPuestos(){
-        $puestos = Puesto::all()->where('estado', 1);
-        return view('puestos', compact('puestos'));
+        try {
+            $puestos = Puesto::all()->where('estado', 1);
+            return view('puestos', compact('puestos'));
+        } catch (\Throwable $th) {
+            Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
+            $error = 'errir';
+            return response()->json(["Estado"=>"Fallido","Codigo"=>500, "Mapping_Error"=>$error],500);
+        }
+      
     }
 
     public function addPuesto(){
@@ -30,12 +37,12 @@ class PuestoController extends Controller
         try {
             $puesto = Puesto::create($request->all());
             Log::info("REQUEST: ".$request);
-           $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"]], 200);
+           $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exitoso", "Descripcion"=>"Registro Agregado"]], 200);
            Log::info("RESPONSE: ".$response);
            return $response;
         } catch (\Illuminate\Database\QueryException $th) {
             Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
-            $error = Error::where('codigo_error',$th->getCode())->where( )->get();
+            $error = Error::where('codigo_error',$th->getCode())->get();
             return response()->json(["Estado"=>"Fallido","Codigo"=>500, "Mapping_Error"=>$error],500);
         }
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('puesto', function (Blueprint $table) {
             $table->id();
-            $table->string('puesto_nombre');
+            $table->string('puesto_nombre')->unique();
             $table->unsignedBigInteger('estado');
             $table->timestamps();
         });
