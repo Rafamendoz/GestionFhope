@@ -20,6 +20,11 @@ return new class extends Migration
             ['email'=>'test_fhope@gmail.com','password'=>'test123456','user'=>'test.test','intentos'=>'3','estado'=>'1']
             ]
         );
+
+        DB::table('errores')->insert([
+            ['codigo_error'=>23000,'descripcion'=>'Los datos ingresados no son permitidos para la solicitud, por favor revisar.']
+            ]
+        );
     }
 
     /**

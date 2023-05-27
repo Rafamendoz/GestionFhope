@@ -137,4 +137,18 @@ Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@
     Route::post('tokenR/add', 'App\Http\Controllers\DetalleBancoController@setDetalleBanco');
   
   
+    //RUTAS PARA ENTIDAD CLIENTE
+     /* RUTA PARA METODO DE OBTENER TODOS LOS USUARIOS ACTIVOS PARA LA VISTA*/
+   Route::get('cliente', 'App\Http\Controllers\ClienteController@getCliente');
+   /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+  Route::get('clienteR', 'App\Http\Controllers\ClienteController@getClientesRest');
+   /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+  Route::get('clienteR/{id}', 'App\Http\Controllers\ClienteController@getClienteRestById');
+   /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+  Route::post('clienteR/add', 'App\Http\Controllers\ClienteController@setCliente');
+   /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+  Route::put('clienteR/update/{id}', 'App\Http\Controllers\ClienteController@putCliente');
+   /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+  Route::put('clienteR/delete/{id}', 'App\Http\Controllers\ClienteController@deleteCliente');
+
 

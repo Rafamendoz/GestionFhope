@@ -45,3 +45,7 @@ Route::get('puestos/addpuesto', 'App\Http\Controllers\PuestoController@addPuesto
 
 //CRUD USUARIO//
 Route::get('usuarios', 'App\Http\Controllers\UsuarioController@getUsuario')->name('Usuarios');
+
+//CRUD CLIENTE//
+Route::get('clientes', 'App\Http\Controllers\ClienteController@getClientes')->name('Clientes');
+Route::get('clientes/addcliente', 'App\Http\Controllers\ClienteController@addCliente')->name('AddCliente');

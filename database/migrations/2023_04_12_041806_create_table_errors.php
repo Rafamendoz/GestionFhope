@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('errores', function (Blueprint $table) {
             $table->unsignedBigInteger('codigo_error', false)->unique()->primary();
             $table->string("descripcion");
-            $table->string("sql_message");
             $table->timestamps();
         });
     }
