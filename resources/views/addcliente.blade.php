@@ -14,7 +14,7 @@
 
                     <!-- DataTales Example -->
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -80,7 +80,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 bg-primary">
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center bg-primary">
@@ -91,16 +91,19 @@
                                     
                                         <div class="row p-2">
                                             
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                  <h4 class="text-center font-weight-bold text-primary">Panel de Clientes</h4>
                                                   <p class="text-justify">El siguiente panel esta destinado a registrar la informacion de los clientes, por favor introduzca la informacion solicitada.
                                                   </p>
                                                 </div>
-                                                <div class="col-sm-2">
+                                              
+                                            
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-sm-12">
                                                     <img class="img-profile rounded-circle"
                                                         src="{{ asset('build/img/undraw_profile.svg')}}">
                                                 </div>
-                                            
                                         </div>
 
             

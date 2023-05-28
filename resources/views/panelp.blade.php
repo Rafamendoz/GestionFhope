@@ -65,9 +65,9 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Resumen Ventas</a>
-                        <a class="collapse-item" href="cards.html">POS</a>
+                        <h6 class="collapse-header">Componentes de <br>Produccion:</h6>
+                        <a class="collapse-item" href="{{route('Ventas')}}">Resumen Ventas</a>
+                        <a class="collapse-item" href="{{route('POS')}}">POS</a>
                         <a class="collapse-item" href="{{route('Clientes')}}">Clientes</a>
                         <a class="collapse-item" href="{{route('Productos')}}">Productos</a>
 
@@ -85,8 +85,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Bancos</a>
+                        <h6 class="collapse-header">Componentes de Finanzas:</h6>
+                        <a class="collapse-item" href="{{route('Bancos')}}">Bancos</a>
                     </div>
                 </div>
             </li>
@@ -102,13 +102,13 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tablas Dependientes:</h6>
                         <a class="collapse-item" href="{{route('Usuarios')}}">Usuarios</a>
-                        <a class="collapse-item" href="register.html">Colaboradores</a>
+                        <a class="collapse-item" href="{{route('Colaboradores')}}">Colaboradores</a>
                  
                         <h6 class="collapse-header">Tablas Independientes</h6> 
                         <a class="collapse-item" href="{{route('Puestos')}}">Puestos</a>
-                        <a class="collapse-item" href="404.html">Tipo Cuentas Bancarias</a>
-                        <a class="collapse-item" href="blank.html">Tipo Monedas</a>
-                        <a class="collapse-item" href="blank.html">Tipo Transaccion</a>
+                        <a class="collapse-item" href="{{route('TipoCuentasBancarias')}}">Tipo Cuentas Bancarias</a>
+                        <a class="collapse-item" href="{{route('TipoMonedas')}}">Tipo Monedas</a>
+                        <a class="collapse-item" href="{{route('TipoTransaccion')}}">Tipo Transaccion</a>
                     </div>
                 </div>
             </li>

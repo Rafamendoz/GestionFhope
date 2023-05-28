@@ -50,3 +50,27 @@ Route::get('clientes/addcliente', 'App\Http\Controllers\ClienteController@addCli
 //CRUD PRODUCTOS//
 Route::get('productos', 'App\Http\Controllers\ProductoController@getProductos')->name('Productos');
 Route::get('productos/addproducto', 'App\Http\Controllers\ProductoController@addProducto')->name('AddProducto');
+
+//CRUD COLABORADORES//
+Route::get('colaboradores', 'App\Http\Controllers\ColaboradorController@getColaboradores')->name('Colaboradores');
+Route::get('colaboradores/addcolaborador', 'App\Http\Controllers\ColaboradorController@addColaborador')->name('AddColaborador');
+
+//CRUD VENTAS//
+Route::get('ventas', 'App\Http\Controllers\ColaboradorController@getVentas')->name('Ventas');
+Route::get('ventas/addventa', 'App\Http\Controllers\ColaboradorController@addVentas')->name('AddVenta');
+
+//CRUD POS//
+Route::get('pos', 'App\Http\Controllers\ColaboradorController@getVentas')->name('POS');
+
+//CRUD BANCOS//
+Route::get('bancos', 'App\Http\Controllers\ColaboradorController@getVentas')->name('Bancos');
+
+
+Route::get('tipocuentasbancarias', 'App\Http\Controllers\ColaboradorController@getVentas')->name('TipoCuentasBancarias');
+
+
+Route::get('tipomonedas', 'App\Http\Controllers\ColaboradorController@getVentas')->name('TipoMonedas');
+Route::get('tipotransaccion', 'App\Http\Controllers\ColaboradorController@getVentas')->name('TipoTransaccion');
+
+
+

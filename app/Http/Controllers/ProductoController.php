@@ -74,7 +74,7 @@ class ProductoController extends Controller
 
     }
 
-    public function deleteCliente(Request $request , $id){
+    public function deleteProducto(Request $request , $id){
         Log::info("REQUEST: ".$request);
         try {
             $producto = Producto::find($id);
@@ -100,4 +100,5 @@ class ProductoController extends Controller
         }
        
     }
+    
 }
