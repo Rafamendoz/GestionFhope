@@ -25,6 +25,10 @@
                                     <div class="card-body">
                                         <div class="row p-2">
                                         <form class="row g-3">
+                                        <div class="col-md-12 mb-3">
+                                                <label for="orden" class="form-label">N.Orden:</label>
+                                                <label class="form-control col-sm-2" id="orden">1</label>
+                                            </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="inputEmail4" class="form-label">DNI:</label>
                                                 <input type="number" class="form-control" id="dni">
@@ -95,7 +99,7 @@
                                                         </div>
                                                         <div class="col-12 mb-3">
                                                             <label for="inputAddress" class="form-label">Descripcion:</label>
-                                                            <input readonly type="text" class="form-control" id="descripcion" placeholder="1234 Main St">
+                                                            <input readonly type="text" class="form-control" id="descripcion">
                                                         </div>
                                                         <div class="col-12 mb-3" hidden id="CapaDescuento">
                                                             <div class="form-check">
@@ -154,10 +158,9 @@
 
                                     <div class="card-body">
                                     <div class="table-responsive">
-                                <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered " id="table2" width="100%" cellspacing="0">
                                     <thead class="text-center">
                                         <tr>
-                                            <th>N.</th>
                                             <th>Codigo Producto</th>
                                             <th>Nombre</th>
                                             <th>Precio</th>
@@ -177,6 +180,12 @@
                                             
                                             
                                         </tbody>
+                                        <tfoot>
+                                            <div class="col-12 mb-2" id="CapaEnviarOrden" hidden>
+                                                            <button onclick="recorrer()" class="btn btn-warning">Generar Orden</button>
+                                            </div>
+                                        </tfoot>
+                                     
                                 </table>
                             </div>
                                         
@@ -200,9 +209,29 @@
         
 @endsection
 
+<script src="{{ asset('build/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('build/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
 <script>
     let productoactual;
-    let contadorf =0;
+    let contadorf=0;
+ 
+            $( document ).ready(function() {
+        $( "#table2" ).bind( "click", function( event ) {
+            if(event.target.matches(".eliminarRow")){
+                const index =event.target.parentNode.parentNode.rowIndex;
+                let tabla = document.getElementById("table2");
+                tabla.deleteRow(index);
+            }
+         
+        });
+        });
+   
+  
+
+    
+   
+
     function Buscar(){
 
         let dni = $("#dni").val();
@@ -256,6 +285,7 @@
     function BuscarProducto(){
 
         let codigoproducto = $("#producto_codigo").val();
+       
         if(codigoproducto==""){
             
             const Toast = Swal.mixin({
@@ -308,6 +338,8 @@
 
     }
 
+   
+
     function MostrarDescuento(){
         if($("#gridCheck").is(":checked")){
             $("#CapaCantidadDescuento").attr('hidden',false);
@@ -317,7 +349,6 @@
     }
 
     function AdicionarProducto(){
-        let fila = $("#tbody tr").length;
         let precio = productoactual["Producto"].precio;
         let cantidad = $("#cantidad").val();
         let descuentounitario = $("#descuento").val();
@@ -327,30 +358,29 @@
         if(contadorf ==0){
             $("#tbody tr").remove();
             contadorf+=1;
-            $("#tbody").append("<tr id=\"tr"+contadorf+"\"><td>"+fila+"</td>"+
-            "<td>"+productoactual["Producto"].id+"</td>"+
+            $("#tbody").append("<tr><td>"+productoactual["Producto"].id+"</td>"+
             "<td>"+productoactual["Producto"].producto_nom+"</td>"+
             "<td>"+precio+"</td>"+
             "<td>"+cantidad+"</td>"+
             "<td>"+descuentot+"</td>"+
             "<td>"+isv+"</td>"+
             "<td>"+subtotal+"</td>"+
-            "<td><button class=\"btn btn-danger btn-sm\" type=\"button\"><i class=\"fas fa-trash\" onclick=\"eliminarFila("+fila+")\"></i></button></td>"+
+            "<td><button class=\"btn btn-danger btn-sm eliminarRow\" type=\"button\"><i class=\"fas fa-trash\"></i></button></td>"+
             "</tr>");
-            contadorf+=1;
+            $("#CapaEnviarOrden").attr("hidden", false);
+            ResetFormProductos();
         }else{
-            fila+=1;
-            $("#tbody").append("<tr id=\"tr"+fila+"\"><td>"+fila+"</td>"+
-            "<td>"+productoactual["Producto"].id+"</td>"+
+            $("#tbody").append("<tr><td>"+productoactual["Producto"].id+"</td>"+
             "<td>"+productoactual["Producto"].producto_nom+"</td>"+
             "<td>"+precio+"</td>"+
             "<td>"+cantidad+"</td>"+
             "<td>"+descuentot+"</td>"+
             "<td>"+isv+"</td>"+
             "<td>"+subtotal+"</td>"+
-            "<td><button class=\"btn btn-danger btn-sm\" type=\"button\"><i class=\"fas fa-trash\" onclick=\"eliminarFila("+fila+")\"></i></button></td>"+
+            "<td><button class=\"btn btn-danger btn-sm eliminarRow\" type=\"button\"><i class=\"fas fa-trash\"></i></button></td>"+
             "</tr>");
             contadorf+=1;
+            ResetFormProductos();
 
         }
     }
@@ -392,12 +422,55 @@
              
     }
 
-    function eliminarFila(fila){
-        contadorf-=1;
-        $("#tr"+fila).remove();
-        console.log(contadorf);
+
+    function ResetFormProductos(){
+        $("#CapaBotonBuscarProducto").attr('hidden',false);
+        $("#gridCheck").prop("checked",false);
+        $("#CapaCantidadDescuento").attr('hidden',true);
+        $("#CapaBotonAgregar").attr('hidden',true);
+        $("#cantidad").attr('readonly',true);
+        $("#nombre").val('');
+        $("#descripcion").val('');
+        $("#cantidad").val('');
+        $("#CapaDescuento").attr('hidden',true);
+        $("#descuento").val("0.00");
+
+        
+       
+    
+        
+
+        
     }
+    
+    function recorrer(){
+            let count =0;
+            $('#table2 tr').each(function () {
+
+                        if(count>0){
+                            var codigo = $(this).find("td").eq(0).html();
+                            var nombre = $(this).find("td").eq(1).html();
+                            var precio = $(this).find("td").eq(2).html();
+                            var cantidad = $(this).find("td").eq(3).html();
+                            var descuento = $(this).find("td").eq(4).html();
+                            var isv = $(this).find("td").eq(5).html();
+                            var subtotal = $(this).find("td").eq(6).html();
+                            var request = {"codigo":codigo, "nombre":nombre, "precio":precio, "cantidad":cantidad, "descuento":descuento, "isv":isv, "subtotal":subtotal};
+                            console.log(request);
+                            
+
+                        }
+                        count+=1;
+                
+
+            });
+    }
+
+   
 
     
     
 </script>
+
+
+
