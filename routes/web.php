@@ -60,7 +60,7 @@ Route::get('ventas', 'App\Http\Controllers\ColaboradorController@getVentas')->na
 Route::get('ventas/addventa', 'App\Http\Controllers\ColaboradorController@addVentas')->name('AddVenta');
 
 //CRUD POS//
-Route::get('pos', 'App\Http\Controllers\ColaboradorController@getVentas')->name('POS');
+Route::get('pos', 'App\Http\Controllers\VentaController@getVentas')->name('POS');
 
 //CRUD BANCOS//
 Route::get('bancos', 'App\Http\Controllers\ColaboradorController@getVentas')->name('Bancos');
@@ -71,6 +71,11 @@ Route::get('tipocuentasbancarias', 'App\Http\Controllers\ColaboradorController@g
 
 Route::get('tipomonedas', 'App\Http\Controllers\ColaboradorController@getVentas')->name('TipoMonedas');
 Route::get('tipotransaccion', 'App\Http\Controllers\ColaboradorController@getVentas')->name('TipoTransaccion');
+
+
+Route::post('validate', 'App\Http\Controllers\LoginController@login')->name('Validate');
+Route::get('logout', 'App\Http\Controllers\LoginController@logout')->name('Logout');
+
 
 
 

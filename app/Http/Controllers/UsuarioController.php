@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\DB;
+use App\Models\ModelHasRoles;
 
 
 class UsuarioController extends Controller
@@ -49,9 +53,8 @@ class UsuarioController extends Controller
 
 
     public function setUsuario(Request $request){
-        $contra = Crypt::encryptString($request->password);
-        $user =  Crypt::encryptString($request->user);
-        $usuario = User::insert(['email'=>$request->email,'password'=>$contra,'user'=>$user,'intentos'=>$request->intentos,'estado'=>$request->estado,'confirmacion'=>$request->confirmacion]);
+        $contra =   Hash::make($request->password);
+        $usuario = User::insert(['email'=>$request->email,'password'=>$contra,'user'=>$request->user,'intentos'=>$request->intentos,'estado'=>$request->estado]);
         return response()->json(["Codigo"=>"202","Estado"=>"Exitoso", "Descripcion:"=>"Registro Agregado"], 202);
 
     }

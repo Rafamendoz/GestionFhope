@@ -46,19 +46,39 @@ class ProductoController extends Controller
         $productos = Producto::all();
         return response()->json([
             "Productos"=>$productos, "Response"=>[
-            "Codigo"=>"202",
+            "Codigo"=>"200",
             "Estado"=>"Exitoso"]
         ], 200);
         
     }
 
-    public function getProductoRestById($id){
-        $producto = Producto::find($id);
-        return response()->json([
-            "Producto"=>$producto, 
-            "Codigo"=>"202",
-            "Estado"=>"Exitoso"
-        ], 200);
+    public function getProductoRestById($id, Request $request){
+        try {   
+            Log::info("REQUEST: ".$request);
+            $producto = Producto::find($id);
+            if(empty($producto)){
+                $error = Error::where('codigo_error',404)->get();
+                $response =  response()->json(["Estado"=>"No Encontrado","Codigo"=>404, "Mapping_Error"=>$error],404);
+                Log::info("RESPONSE: ".$response);
+                return $response;
+            }else{
+                $response = response()->json([  "Producto"=>$producto, "Response"=>[
+                 
+                   "Codigo"=>"200",
+                   "Estado"=>"Exitoso",
+                   "Descripcion"=>"Registro Encontrado"
+               ]], 200);
+               Log::info("RESPONSE: ".$response);
+               return $response;
+
+            }
+
+        } catch (\Throwable $th) {
+            Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
+            $error = Error::where('codigo_error',$th->getCode())->get();
+            return response()->json(["Estado"=>"Fallido","Codigo"=>500, "Mapping_Error"=>$error],500);
+        }
+       
     }
 
     public function putProducto(Request $request,$id){
