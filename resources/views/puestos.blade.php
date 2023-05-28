@@ -12,16 +12,26 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <h5 class=" font-weight-bold text-primary">Data de Puestos</h5>
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data de Puestos</h6>
+                                    <div class="dropdown no-arrow">
+                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus fa-sm fa-fw text-primary-400"></i>
+                                        </a>
 
-                            </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <h7 class=" font-weight-bold text-primary">Add</h6>
-                            <a class="btn btn-primary btn-md" href="{{route('AddPuesto')}}"><i class="fas fa-plus"></i></a>
-                            </div>
-                        </div>
+                                       
+
+                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                            aria-labelledby="dropdownMenuLink">
+                                            <div class="dropdown-header">Acciones</div>
+                                            <a class="dropdown-item" href="{{route('AddPuesto')}}">Agregar Puesto</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                        </div>
+                                    </div>
+                                </div>
 
                         <div class="card-body">
                             <div class="table-responsive">

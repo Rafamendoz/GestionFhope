@@ -141,10 +141,10 @@
                                         </div>
 
                                         <div class="row p-2">
-                                        <div class="col-sm-12">
-                                                    <img class="img-profile rounded-circle"
-                                                        src="{{ asset('build/img/undraw_profile.svg')}}">
-                                                </div>
+                                            <div class="col-sm-12">
+                                                        <img class="img-profile rounded-circle"
+                                                            src="{{ asset('build/img/undraw_profile.svg')}}">
+                                                    </div>
                                         </div>
 
             
