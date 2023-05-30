@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('venta_id');
             $table->unsignedBigInteger('producto_id');
-            $table->float('precio');
+            $table->float('precio',9,2);
             $table->integer('cantidad');
-            $table->float('descuento');
-            $table->float('isv');
-            $table->float('subtotal');
+            $table->float('descuento',9,2);
+            $table->float('isv',9,2);
+            $table->float('subtotal',9,2);
             $table->unsignedBigInteger('estado');
             $table->timestamps();
         });

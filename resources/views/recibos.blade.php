@@ -1,113 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      margin: 0;
-    }
-    
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      border: 1px solid #ccc;
-      padding: 20px;
-    }
-    
-    h1 {
-      text-align: center;
-      margin-top: 0;
-    }
-    
-    .receipt-info {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-    }
-    
-    .receipt-info span {
-      display: block;
-    }
-    
-    .receipt-table {
-      width: 100%;
-      margin-top: 20px;
-      border-collapse: collapse;
-    }
-    
-    .receipt-table th,
-    .receipt-table td {
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-    
-    .receipt-table th {
-      background-color: #f2f2f2;
-      font-weight: bold;
-    }
-    
-    .receipt-table td:last-child {
-      text-align: right;
-    }
-    
-    .total-row {
-      font-weight: bold;
-    }
-    
-    .footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+  <title>Factura térmica</title>
+    <style>
+        body {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.address, .contact {
+  margin-bottom: 5px;
+}
+
+.content {
+  margin-bottom: 10px;
+}
+
+.customer-info, .invoice-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th, .item-table td {
+  border: 1px solid #000;
+  padding: 5px;
+}
+
+.item-table th {
+  background-color: #f0f0f0;
+  text-align: left;
+}
+
+.item-table td {
+  text-align: right;
+}
+
+.total-row {
+  font-weight: bold;
+}
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Recibo</h1>
-    
-    <div class="receipt-info">
-      <span>Fecha: 29 de mayo de 2023</span>
-      <span>No. de recibo: 00123</span>
+  <div class="header">
+    <div class="title">Recibo de Compra</div>
+    <hr>
+    <div class="address">Fhope Company</div>
+    <hr>
+    <div class="contact">Teléfono: +504 8920-3439</div>
+    <div class="contact">Correo Electrónico: info@fhope.net</div>
+    <div class="contact">Pago: Contado</div>
+
+  </div>
+    <hr>
+  <div class="content">
+    <div class="customer-info">
+      <div class="info-label">Cliente:</div>
+      <div class="info-value">Helen Orrellana</div>
     </div>
-    
-    <table class="receipt-table">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Producto 1</td>
-          <td>2</td>
-          <td>$10.00</td>
-          <td>$20.00</td>
-        </tr>
-        <tr>
-          <td>Producto 2</td>
-          <td>1</td>
-          <td>$15.00</td>
-          <td>$15.00</td>
-        </tr>
-        <tr class="total-row">
-          <td colspan="3">Total:</td>
-          <td>$35.00</td>
-        </tr>
-      </tbody>
-    </table>
-    
-    <div class="footer">
-      ¡Gracias por su compra!
+    <div class="customer-info">
+      <div class="info-label">Codigo Cliente:</div>
+      <div class="info-value">11121</div>
+    </div>
+    <div class="invoice-info">
+      <div class="info-label">Nº de Orden:</div>
+      <div class="info-value">12345</div>
+    </div>
+    <div class="customer-info">
+      <div class="info-label">Usuario generador:</div>
+      <div class="info-value">rafael.mendoza</div>
+    </div>
+    <div class="customer-info">
+      <div class="info-label">Fecha de Impresion:</div>
+      <div class="info-value">2000-01-10</div>
+    </div>
+    <div class="customer-info">
+      <div class="info-label">Hora de Impresion:</div>
+      <div class="info-value">24:01:10</div>
+    </div>
+    <div class="customer-info">
+      <div class="info-label">Direccion de Envio:</div>
+      <div class="info-value">Unah edificio administrativo Alma mater</div>
     </div>
   </div>
+  
+
+  <table class="item-table">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>descuento</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach($data as $valor)
+      <tr>
+        <td>{{$valor->producto_nom}}</td>
+        <td>{{$valor->cantidad}}</td>
+        <td>L {{$valor->precio}}</td>
+        <td>L {{$valor->descuento}}</td>
+        <td>L {{$valor->subtotal}}</td>
+      </tr>
+      @endforeach
+ 
+    </tbody>
+    <tfoot>
+      <tr class="total-row">
+        <td colspan="3">Total:</td>
+        <td>$95.00</td>
+      </tr>
+    </tfoot>
+  </table>
 </body>
 </html>
+
 
 
 

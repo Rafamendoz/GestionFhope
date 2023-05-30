@@ -15,8 +15,14 @@ class VentaController extends Controller
 {
     public function getVentas(){
         try {
-            $id = Venta::latest('id')->first() ;
-            $numero_orden = $id->id+1   ;
+         
+            $id = Venta::latest('id')->first();
+            if(empty($id)){
+                $numero_orden = $id+1;
+            }else{
+                $numero_orden = $id->id+1;
+            }
+           
             return view('pos', compact('numero_orden'));
         } catch (\Throwable $th) {
             Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());

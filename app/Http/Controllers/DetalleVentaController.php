@@ -17,7 +17,7 @@ class DetalleVentaController extends Controller
         try {
             $dventa = DetalleVenta::create($request->all());
             Log::info("REQUEST: ".$request);
-           $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exitoso", "Descripcion"=>"Registro Agregado"]], 200);
+           $response = response()->json(["Data_Respuesta"=>["Orden"=>$dventa->venta_id,"Codigo"=>"200","Estado"=>"Exitoso", "Descripcion"=>"Registro Agregado"]], 200);
            Log::info("RESPONSE: ".$response);
            return $response;
         } catch (\Illuminate\Database\QueryException $th) {

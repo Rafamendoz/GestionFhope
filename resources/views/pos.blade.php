@@ -409,7 +409,7 @@
         },
         didClose: (toast) => {
                 if(dataResponse.Codigo==200){
-                    console.log("NULL1");
+                    
                 }else{
                     console.log("NULL");
 
@@ -432,6 +432,44 @@
              
     }
 
+    function mostrarMensajeRecibo(dataResponse){
+         
+         const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+             toast.addEventListener('mouseenter', Swal.stopTimer)
+             toast.addEventListener('mouseleave', Swal.resumeTimer)
+         },
+         didClose: (toast) => {
+                 if(dataResponse.Codigo==200){
+                    location.href = "../ver/recibo/"+$("#orden").val();
+                     
+                 }else{
+                     console.log("NULL");
+ 
+                 }
+     
+         }
+         })
+ 
+         if(dataResponse.Codigo==200){
+                     Toast.fire({
+                     icon: 'success',
+                     title: dataResponse.Estado + "! " + dataResponse.Descripcion 
+                     })
+         }else{
+                 Toast.fire({
+                 icon: 'error',
+                 title: dataResponse.Estado + "! " + dataResponse.Mapping_Error[0].descripcion 
+                 })
+         }
+              
+     }
+ 
 
     function ResetFormProductos(){
         $("#CapaBotonBuscarProducto").attr('hidden',false);
@@ -525,7 +563,7 @@
             if(response['Data_Respuesta'].Codigo==200){
                 if(count==pos){
                             response = {"Codigo":200, "Estado":"Exitoso", "Descripcion": "Venta Registrada"};
-                            mostrarMensaje(response);
+                            mostrarMensajeRecibo(response);
 
                 }
             }

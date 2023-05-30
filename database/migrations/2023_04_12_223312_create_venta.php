@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->datetime('fecha');
             $table->string('direccionEnvio');
-            $table->float('total');
+            $table->float('total',9,2);
             $table->unsignedBigInteger('estado');
             $table->timestamps();
         });
