@@ -15,8 +15,9 @@ class VentaController extends Controller
 {
     public function getVentas(){
         try {
-            $colaboradores = Colaborador::all()->where('estado', 1);
-            return view('pos', compact('colaboradores'));
+            $id = Venta::latest('id')->first() ;
+            $numero_orden = $id->id+1   ;
+            return view('pos', compact('numero_orden'));
         } catch (\Throwable $th) {
             Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
             $error = 'errir';
@@ -33,9 +34,9 @@ class VentaController extends Controller
     }
 
 
-    public function setColaborador(Request $request){
+    public function setVenta(Request $request){
         try {
-            $colaborador = Colaborador::create($request->all());
+            $venta = Venta::create($request->all());
             Log::info("REQUEST: ".$request);
            $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exitoso", "Descripcion"=>"Registro Agregado"]], 200);
            Log::info("RESPONSE: ".$response);
@@ -47,52 +48,41 @@ class VentaController extends Controller
         }
     }
 
-    public function getColaboradoresRest(){
-        $colaboradores = Colaborador::all();
+    public function getVentasRest(){
+        $ventas = Venta::all();
         return response()->json([
-            "Colaboradores"=>$colaboradores, "Response"=>[
+            "Ventas"=>$ventas, "Response"=>[
             "Codigo"=>"200",
             "Estado"=>"Exitoso"]
         ], 200);
         
     }
 
-    public function getProductoRestById($id){
-        $colaborador = Colaborador::find($id);
+    public function getVentaRestById($id){
+        $venta = Venta::find($id);
         return response()->json([
-            "Colaborador"=>$colaborador, 
+            "Venta"=>$venta, 
             "Codigo"=>"200",
             "Estado"=>"Exitoso"
         ], 200);
     }
 
-    public function putColaborador(Request $request,$id){
-        $colaborador = Colaborador::find($id);
-        $colaborador->update($request->all());
-        return response()->json(
-            ["Colaborador"=>$colaborador
-            ,"Codigo"=>"200",
-            "Estado"=>"Exitoso",
-            "Descripcion"=>"Registro Modificado"
-            ]
-        );
+    
 
-    }
-
-    public function deleteColaborador(Request $request , $id){
+    public function deleteVenta(Request $request , $id){
         Log::info("REQUEST: ".$request);
         try {
-            $colaborador = Colaborador::find($id);
+            $venta = Venta::find($id);
             $x = $request->estado;
             switch($x){
                 case 1:
-                    $colaborador->update($request->all());
+                    $venta->update($request->all());
                     $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exito", "Descripcion"=>"Registro Activado"]], 200);
                     Log::info("RESPONSE: ".$response);
                     return $response;
                     break;
                 case 2:
-                    $colaborador->update($request->all());
+                    $venta->update($request->all());
                     $response = response()->json(["Data_Respuesta"=>["Codigo"=>"200","Estado"=>"Exito", "Descripcion"=>"Registro Desactivado"]], 200);
                     Log::info("RESPONSE: ".$response);
                     return $response;

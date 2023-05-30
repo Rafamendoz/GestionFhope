@@ -75,6 +75,7 @@ Route::get('tipotransaccion', 'App\Http\Controllers\ColaboradorController@getVen
 
 Route::post('validate', 'App\Http\Controllers\LoginController@login')->name('Validate');
 Route::get('logout', 'App\Http\Controllers\LoginController@logout')->name('Logout');
+Route::get('/recibo', 'App\Http\Controllers\CreatePdf@crearRecibo');
 
 
 

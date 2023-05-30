@@ -166,4 +166,24 @@ Route::post('usuarioR/loggin/validate', 'App\Http\Controllers\UsuarioController@
   
   
 
+    Route::get('ventaR', 'App\Http\Controllers\VentaController@getVentasRest');
+    /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+   Route::get('ventaR/{id}', 'App\Http\Controllers\VentaController@getVentaRestById');
+    /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+   Route::post('ventaR/add', 'App\Http\Controllers\VentaController@setVenta');
+    /* RUTA PARA METODO DE ACTUALIZAR UN USUARIO POR ID*/
+   Route::put('ventaR/update/{id}', 'App\Http\Controllers\VentaController@putVenta');
+    /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+   Route::put('ventaR/delete/{id}', 'App\Http\Controllers\VentaController@deleteVenta');
+
+   /* RUTA PARA METODO DE OBTENER EL USUARIO POR ID ACTIVO*/
+  Route::get('detalleVentaR/{id}', 'App\Http\Controllers\DetalleVentaController@getDetalleVentaRestByVentaId');
+   /* RUTA PARA METODO DE AGREGAR UN USUARIO*/
+  Route::post('detalleVentaR/add', 'App\Http\Controllers\DetalleVentaController@setDetalleVenta');
+   /* RUTA PARA METODO DE ACTUALIZAR EL ESTADO DEL USUARIO POR ID ACTIVO*/
+  Route::put('detalleVentaR/delete/{id}', 'App\Http\Controllers\DetalleVentaController@deleteDetalleVenta');
+
+ 
+ 
+
 

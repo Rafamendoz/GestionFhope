@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetalleVenta extends Model
 {
-    use HasFactory;
+   
+    public $table = 'detalleventa';
+    public $timestamps = true;
+    protected $fillable = ['id', 'venta_id', 'producto_id','precio','cantidad', 'descuento', 'isv','subtotal','estado'];
 }

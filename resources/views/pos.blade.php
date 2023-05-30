@@ -25,9 +25,13 @@
                                     <div class="card-body">
                                         <div class="row p-2">
                                         <form class="row g-3">
-                                        <div class="col-md-12 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label for="orden" class="form-label">N.Orden:</label>
-                                                <label class="form-control col-sm-2" id="orden">1</label>
+                                                <input class="form-control" id="orden"  readonly  value="{{$numero_orden}}"></input>
+                                            </div>
+                                            <div class="col-md-6 mb-3" id="capaTotal" hidden>
+                                                <label for="total" class="form-label">Total:</label>
+                                                <input class="form-control" id="total" value=""   readonly></input>
                                             </div>
                                             <div class="col-md-6 mb-3">
                                                 <label for="inputEmail4" class="form-label">DNI:</label>
@@ -182,7 +186,7 @@
                                         </tbody>
                                         <tfoot>
                                             <div class="col-12 mb-2" id="CapaEnviarOrden" hidden>
-                                                            <button onclick="recorrer()" class="btn btn-warning">Generar Orden</button>
+                                                            <button onclick="Guardar()" class="btn btn-warning">Generar Orden</button>
                                             </div>
                                         </tfoot>
                                      
@@ -215,6 +219,7 @@
 <script>
     let productoactual;
     let contadorf=0;
+    let idcliente=0;
  
             $( document ).ready(function() {
         $( "#table2" ).bind( "click", function( event ) {
@@ -222,6 +227,7 @@
                 const index =event.target.parentNode.parentNode.rowIndex;
                 let tabla = document.getElementById("table2");
                 tabla.deleteRow(index);
+               total();
             }
          
         });
@@ -266,6 +272,7 @@
             let response = JSON.parse(JSON.stringify(data));
             $("#correo").val(response['Cliente'][0].cliente_correo);
             $("#nombrecliente").val(response['Cliente'][0].cliente_nom);
+            idcliente = response['Cliente'][0].id;
             mostrarMensaje(response['Response']);
 
         
@@ -367,6 +374,8 @@
             "<td>"+subtotal+"</td>"+
             "<td><button class=\"btn btn-danger btn-sm eliminarRow\" type=\"button\"><i class=\"fas fa-trash\"></i></button></td>"+
             "</tr>");
+            $("#capaTotal").attr("hidden", false);
+
             $("#CapaEnviarOrden").attr("hidden", false);
             ResetFormProductos();
         }else{
@@ -383,6 +392,7 @@
             ResetFormProductos();
 
         }
+        total();
     }
 
     function mostrarMensaje(dataResponse){
@@ -445,11 +455,12 @@
     
     function recorrer(){
             let count =0;
+            let conteoexito = 0;
+            let pos = $('#table2 tr').length-1
             $('#table2 tr').each(function () {
 
                         if(count>0){
                             var codigo = $(this).find("td").eq(0).html();
-                            var nombre = $(this).find("td").eq(1).html();
                             var precio = $(this).find("td").eq(2).html();
                             var cantidad = $(this).find("td").eq(3).html();
                             var descuento = $(this).find("td").eq(4).html();
@@ -457,13 +468,112 @@
                             var subtotal = $(this).find("td").eq(6).html();
                             var request = {"codigo":codigo, "nombre":nombre, "precio":precio, "cantidad":cantidad, "descuento":descuento, "isv":isv, "subtotal":subtotal};
                             console.log(request);
+                            GuardarDetalleVenta(codigo,precio,cantidad, descuento, subtotal, count, pos);
                             
+
+                        }
+                        count+=1;
+                        
+                
+
+            });
+    }
+
+    function total(){
+            let count =0;
+            var subtotal =0;
+            $('#table2 tr').each(function () {
+
+                        if(count>0){
+               
+                             subtotal += parseFloat($(this).find("td").eq(6).html());
+                        
 
                         }
                         count+=1;
                 
 
             });
+            $("#total").val(subtotal);
+
+    }
+
+
+
+    function GuardarDetalleVenta(producto_id, precio, cantidad, descuento, subtotal, count, pos){
+        let idorden = $("#orden").val();
+        
+        $.ajax({
+            method: "POST",
+            url: "../../api/detalleVentaR/add",
+            data: {
+                "venta_id": idorden,
+                "producto_id": producto_id,
+                "precio": precio,
+                "cantidad": cantidad,
+                "descuento": descuento,
+                "isv": 0.00,
+                "subtotal": subtotal,
+                "estado":1
+
+
+
+            }
+        })
+        .done(function( data ) {
+            let response = JSON.parse(JSON.stringify(data));
+            if(response['Data_Respuesta'].Codigo==200){
+                if(count==pos){
+                            response = {"Codigo":200, "Estado":"Exitoso", "Descripcion": "Venta Registrada"};
+                            mostrarMensaje(response);
+
+                }
+            }
+            
+        
+        }).fail(function(data){
+            return 2;
+
+        });
+
+    }
+
+    function Guardar(){
+        let idorden = $("#orden").val();
+        let cliente_id = idcliente;
+        let idusuario = {{auth()->user()->id}};
+        let fecha = $("#estado").val();
+        let direccion = $("#direccion").val();
+        let total = $("#total").val();
+        var d = new Date();
+        var strDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate()+ " "+d.getHours()+"-"+d.getMinutes()+"-"+d.getSeconds();
+      
+        $.ajax({
+            method: "POST",
+            url: "../../api/ventaR/add",
+            data: {
+                "fecha": strDate,
+                "cliente_id": cliente_id,
+                "usuario_id": idusuario,
+                "direccionEnvio": direccion,
+                "total": total,
+                "estado": 1,
+
+
+            }
+        })
+        .done(function( data ) {
+            let response = JSON.parse(JSON.stringify(data));
+            if(response['Data_Respuesta'].Codigo==200){
+                   recorrer();
+            }
+            
+        
+        }).fail(function(data){
+            let response = JSON.parse(JSON.stringify(data));
+            mostrarMensaje(response['responseJSON']);
+
+        });
     }
 
    
