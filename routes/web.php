@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Artisan;
 use App\Models\Usuario;
 
 /*
@@ -262,5 +262,16 @@ Route::get('ver/recibo/{id}', 'App\Http\Controllers\CreatePdf@verRecibo')->name(
 
 
 
+
+Route::get('/startApp/12106', function(){
+    Artisan::call('migrate');
+    dd(Artisan::output());
+});
+
+
+Route::get('/startApp/rollback/12106', function(){
+    Artisan::call('migrate:fresh');
+    dd(Artisan::output());
+});
 
 

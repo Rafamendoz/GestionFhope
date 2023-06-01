@@ -20,6 +20,7 @@ Artisan::command('inspire', function () {
 
 
 
+
 Artisan::command('logs:clear', function() {
     
     exec('echo "" > ' . storage_path('logs/laravel.log'));
