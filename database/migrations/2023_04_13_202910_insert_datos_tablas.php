@@ -23,6 +23,8 @@ return new class extends Migration
 
         DB::table('errores')->insert([
             ['codigo_error'=>23000,'descripcion'=>'Los datos ingresados no son permitidos para la solicitud, por favor revisar.']
+            ,['codigo_error'=>404,'descripcion'=>'El registro solicitado no fue encontrado porque no existe.']
+
             ]
         );
     }

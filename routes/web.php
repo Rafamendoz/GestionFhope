@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name("Dashboard");
 
 
 Route::get('/login/{id}', 'App\Http\Controllers\UsuarioController@validarCredenciales');
@@ -56,11 +56,11 @@ Route::get('colaboradores', 'App\Http\Controllers\ColaboradorController@getColab
 Route::get('colaboradores/addcolaborador', 'App\Http\Controllers\ColaboradorController@addColaborador')->name('AddColaborador');
 
 //CRUD VENTAS//
-Route::get('ventas', 'App\Http\Controllers\ColaboradorController@getVentas')->name('Ventas');
+Route::get('ventas', 'App\Http\Controllers\VentaController@getVentas')->name('Ventas');
 Route::get('ventas/addventa', 'App\Http\Controllers\ColaboradorController@addVentas')->name('AddVenta');
 
 //CRUD POS//
-Route::get('pos', 'App\Http\Controllers\VentaController@getVentas')->name('POS');
+Route::get('pos', 'App\Http\Controllers\POSController@getPOS')->name('POS');
 
 //CRUD BANCOS//
 Route::get('bancos', 'App\Http\Controllers\ColaboradorController@getVentas')->name('Bancos');

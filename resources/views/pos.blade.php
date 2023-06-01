@@ -23,43 +23,67 @@
                                     </div>
 
                                     <div class="card-body">
+                                    
                                         <div class="row p-2">
-                                        <form class="row g-3">
-                                            <div class="col-md-6 mb-3">
-                                                <label for="orden" class="form-label">N.Orden:</label>
-                                                <input class="form-control" id="orden"  readonly  value="{{$numero_orden}}"></input>
-                                            </div>
-                                            <div class="col-md-6 mb-3" id="capaTotal" hidden>
-                                                <label for="total" class="form-label">Total:</label>
-                                                <input class="form-control" id="total" value=""   readonly></input>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="inputEmail4" class="form-label">DNI:</label>
-                                                <input type="number" class="form-control" id="dni">
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label for="inputPassword4" class="form-label">Usuario:</label>
-                                                <input readonly type="text" class="form-control" id="usuario" value="{{auth()->user()->user}}">
-                                            </div>
-                                            <div class="col-12 mb-3">
-                                                <label for="inputAddress" class="form-label">Direccion de Envio:</label>
-                                                <input type="text" class="form-control" id="direccion" placeholder="1234 Main St">
-                                            </div>
-                                          
-                                            <div class="col-md-6">
-                                                <label for="inputCity" class="form-label">Nombre del Cliente:</label>
-                                                <input type="text" class="form-control" id="nombrecliente" readonly>
-                                            </div>
+                                            <form class="row g-3">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="orden" class="form-label">N.Orden:</label>
+                                                    <input class="form-control" id="orden"  readonly  value="{{$numero_orden}}"></input>
+                                                </div>
+                                                
+
+                                                <div class="col-md-6 mb-3" id="capaTotal" >
+                                                    <label for="total" class="form-label">Total:</label>
+                                                    <input class="form-control" id="total" value=""   readonly></input>
+                                                </div>
+                                                <div class="col-md-12 mb-1" id="capaTotal" >
+                                                <label for="orden" class="form-label">Tipo de Identificacion:</label>
+                                                </div>
+
+                                                <div class="col-md-12 mb-2">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked onclick="MostrarIdentificacion()">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            DNI
+                                                        </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  onclick="MostrarIdentificacion()">
+                                                        <label class="form-check-label" for="flexRadioDefault2">
+                                                            Codigo Cliente
+                                                        </label>
+                                                    </div>
+                                                </div>
+
                                             
-                                            <div class="col-md-6">
-                                                <label for="inputZip" class="form-label">Correo Electronico:</label>
-                                                <input type="text" class="form-control" id="correo" readonly>
-                                            </div>
-                                           
-                                          
-                                        </form>
-                                        <div class="col-12 ">
-                                                <button onclick="Buscar()" class="btn btn-primary">Buscar</button>
+                                            
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inputEmail4" class="form-label" id="id_label">DNI:</label>
+                                                    <input type="number" class="form-control" id="dni">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="inputPassword4" class="form-label">Usuario:</label>
+                                                    <input readonly type="text" class="form-control" id="usuario" value="{{auth()->user()->user}}">
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <label for="inputAddress" class="form-label">Direccion de Envio:</label>
+                                                    <input type="text" class="form-control" id="direccion" placeholder="1234 Main St">
+                                                </div>
+                                            
+                                                <div class="col-md-6">
+                                                    <label for="inputCity" class="form-label">Nombre del Cliente:</label>
+                                                    <input type="text" class="form-control" id="nombrecliente" readonly>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <label for="inputZip" class="form-label">Correo Electronico:</label>
+                                                    <input type="text" class="form-control" id="correo" readonly>
+                                                </div>
+                                            
+                                            
+                                            </form>
+                                            <div class="col-md-12" id="CapaBuscarCliente">
+                                                    <button onclick="Buscar()" class="btn btn-primary">Buscar</button>
                                             </div>
 
                                         </div>
@@ -263,10 +287,16 @@
 
 
         }else{
+            let urldinamica="";
+            if($('#flexRadioDefault1').is(':checked')){
+                urldinamica ="../../api/clienteR/dni/"+dni;
+            }else{
+                urldinamica ="../../api/clienteR/"+dni;
+            }
             
         $.ajax({
         method: "GET",
-        url: "../../api/clienteR/"+dni,
+        url: urldinamica,
         })
         .done(function( data ) {
             let response = JSON.parse(JSON.stringify(data));
@@ -355,6 +385,14 @@
         }
     }
 
+    function MostrarIdentificacion(){
+        if($('#flexRadioDefault1').is(':checked')){
+            $('#id_label').html("DNI:")
+        }else{
+            $('#id_label').html("Codigo Cliente:")
+        }
+    }
+
     function AdicionarProducto(){
         let precio = productoactual["Producto"].precio;
         let cantidad = $("#cantidad").val();
@@ -409,6 +447,9 @@
         },
         didClose: (toast) => {
                 if(dataResponse.Codigo==200){
+                   
+
+
                     
                 }else{
                     console.log("NULL");
@@ -446,8 +487,12 @@
          },
          didClose: (toast) => {
                  if(dataResponse.Codigo==200){
-                    location.href = "../ver/recibo/"+$("#orden").val();
-                     
+                    $("#CapaEnviarOrden").attr("hidden", true);
+                    $("#CapaBotonBuscarProducto").attr("hidden", true);
+                    $("#CapaBuscarCliente").attr("hidden", true);
+
+                    
+                    ConsultarVerRecibo();
                  }else{
                      console.log("NULL");
  
@@ -553,9 +598,6 @@
                 "isv": 0.00,
                 "subtotal": subtotal,
                 "estado":1
-
-
-
             }
         })
         .done(function( data ) {
@@ -615,7 +657,25 @@
     }
 
    
+    function ConsultarVerRecibo(){
+         
+        Swal.fire({
+        title: 'Desea ver el recibo?',
+        text: "!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, mostrarlo!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = "../ver/recibo/"+$("#orden").val();
 
+        }else{
+            location.href = "../dashboard";
+        }
+        })
+    }
     
     
 </script>

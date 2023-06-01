@@ -8,7 +8,7 @@ use App\Models\Estado;
 use App\Models\Error;
 use App\Models\Venta;
 use App\Models\User;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class VentaController extends Controller
@@ -16,14 +16,9 @@ class VentaController extends Controller
     public function getVentas(){
         try {
          
-            $id = Venta::latest('id')->first();
-            if(empty($id)){
-                $numero_orden = $id+1;
-            }else{
-                $numero_orden = $id->id+1;
-            }
+            $ventas = DB::select('CALL ObtenerCabeceraVentas()');
            
-            return view('pos', compact('numero_orden'));
+            return view('ventas', compact('ventas'));
         } catch (\Throwable $th) {
             Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
             $error = 'errir';

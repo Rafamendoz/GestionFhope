@@ -54,6 +54,36 @@ class ClienteController extends Controller
 
     public function getClienteRestById($id, Request $request){
         try {
+            $cliente = Cliente::where('id',$id)->get();
+            Log::info("REQUEST: ".$request);
+            if(sizeof($cliente)<1){
+                $error = Error::where('codigo_error',404)->get();
+                $response =  response()->json(["Estado"=>"No Encontrado","Codigo"=>404, "Mapping_Error"=>$error],404);
+                Log::info("RESPONSE: ".$response);
+                return $response;
+
+            }else{
+                $response = response()->json([
+                    "Cliente"=>$cliente, "Response"=>[
+                    "Codigo"=>"200",
+                    "Descripcion"=>"Registro Encontrado",
+                    "Estado"=>"Exitoso"]
+                ], 200);
+                    Log::info("RESPONSE: ".$response);
+                    return $response;
+
+            }
+            
+        } catch (\Throwable $th) {
+            Log::error("Codigo de error: ".$th->getCode()." Mensaje: ".$th->getMessage());
+            $error = Error::where('codigo_error',$th->getCode())->get();
+            return response()->json(["Estado"=>"Fallido","Codigo"=>500, "Mapping_Error"=>$error],500);
+        }
+        
+    }
+
+    public function getClienteRestByDNI($id, Request $request){
+        try {
             $cliente = Cliente::where('cliente_DNI',$id)->get();
             Log::info("REQUEST: ".$request);
             if(sizeof($cliente)<1){
