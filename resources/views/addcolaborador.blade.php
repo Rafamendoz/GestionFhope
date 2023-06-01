@@ -178,7 +178,7 @@
         let usuario = $("#usuario").val();
         $.ajax({
         method: "POST",
-        url: "../../api/colaboradorR/add",
+        url: "../../colaboradorR/add",
         data: {
             "colaborador_nombres": nombreColaborador,
             "colaborador_apellidos": apellidoColaborador,

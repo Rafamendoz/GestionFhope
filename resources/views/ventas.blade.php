@@ -86,6 +86,7 @@
         
 @endsection
 
+@section('js')
 <script>
 
     function ConsultarEliminar(id){
@@ -106,10 +107,16 @@
     }
 
     function Eliminar(id){
+        var username = "{{auth()->user()->email}}";
+        var password = "hello";
+        var headers = {
+                "Authorization": "Basic " + btoa(username + ":" + password)
+        };
 
         $.ajax({
         method: "PUT",
-        url: "../../api/productoR/delete/"+id,
+        url: "../../productoR/delete/"+id,
+        headers: headers,
         data: { "estado":2}
         })
         .done(function( data ) {
@@ -164,3 +171,4 @@
 
 
 </script>
+@endsection

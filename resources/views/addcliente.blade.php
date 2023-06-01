@@ -138,7 +138,7 @@
       
         $.ajax({
         method: "POST",
-        url: "../../api/clienteR/add",
+        url: "../../clienteR/add",
         data: {
                 "cliente_nom":nombreCliente,
                 "cliente_tel": telefono, 

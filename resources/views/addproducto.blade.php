@@ -133,7 +133,7 @@
       
         $.ajax({
         method: "POST",
-        url: "../../api/productoR/add",
+        url: "../../productoR/add",
         data: {
             "producto_nom": nombreProducto,
             "producto_des": descripcion,

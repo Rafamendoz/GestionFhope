@@ -82,7 +82,7 @@
                                             
                                             
                                             </form>
-                                            <div class="col-md-12" id="CapaBuscarCliente">
+                                            <div class="col-md-12">
                                                     <button onclick="Buscar()" class="btn btn-primary">Buscar</button>
                                             </div>
 
@@ -237,8 +237,8 @@
         
 @endsection
 
+@section('js')
 <script src="{{ asset('build/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('build/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <script>
     let productoactual;
@@ -289,9 +289,9 @@
         }else{
             let urldinamica="";
             if($('#flexRadioDefault1').is(':checked')){
-                urldinamica ="../../api/clienteR/dni/"+dni;
+                urldinamica ="../../clienteR/dni/"+dni;
             }else{
-                urldinamica ="../../api/clienteR/"+dni;
+                urldinamica ="../../clienteR/"+dni;
             }
             
         $.ajax({
@@ -348,7 +348,7 @@
             
             $.ajax({
             method: "GET",
-            url: "../../api/productoR/"+codigoproducto,
+            url: "../../productoR/"+codigoproducto,
             })
             .done(function( data ) {
                 let response = JSON.parse(JSON.stringify(data));
@@ -489,7 +489,7 @@
                  if(dataResponse.Codigo==200){
                     $("#CapaEnviarOrden").attr("hidden", true);
                     $("#CapaBotonBuscarProducto").attr("hidden", true);
-                    $("#CapaBuscarCliente").attr("hidden", true);
+                    $("#CapaBotonBuscarVz").attr("hidden", true);
 
                     
                     ConsultarVerRecibo();
@@ -588,7 +588,7 @@
         
         $.ajax({
             method: "POST",
-            url: "../../api/detalleVentaR/add",
+            url: "../../detalleVentaR/add",
             data: {
                 "venta_id": idorden,
                 "producto_id": producto_id,
@@ -630,7 +630,7 @@
       
         $.ajax({
             method: "POST",
-            url: "../../api/ventaR/add",
+            url: "../../ventaR/add",
             data: {
                 "fecha": strDate,
                 "cliente_id": cliente_id,
@@ -679,6 +679,9 @@
     
     
 </script>
+
+@endsection
+
 
 
 

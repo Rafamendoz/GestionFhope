@@ -99,7 +99,7 @@
 
         $.ajax({
         method: "PUT",
-        url: "../../api/puestoR/delete/"+id,
+        url: "../../puestoR/delete/"+id,
         data: { "estado":2}
         })
         .done(function( data ) {

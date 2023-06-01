@@ -119,7 +119,7 @@
       
         $.ajax({
         method: "POST",
-        url: "../../api/puestoR/add",
+        url: "../../puestoR/add",
         data: { "puesto_nombre": puesto_nombre, "estado":estado}
         })
         .done(function( data ) {

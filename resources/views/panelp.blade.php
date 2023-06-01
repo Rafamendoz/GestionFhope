@@ -420,8 +420,10 @@
     
 
     <!-- Bootstrap core JavaScript-->
+    @yield('js')
     <script src="{{ asset('build/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{ asset('build/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('build/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
