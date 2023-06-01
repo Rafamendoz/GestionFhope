@@ -75,14 +75,14 @@
                                                     <input type="text" class="form-control" id="nombrecliente" readonly>
                                                 </div>
                                                 
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 mb-3">
                                                     <label for="inputZip" class="form-label">Correo Electronico:</label>
                                                     <input type="text" class="form-control" id="correo" readonly>
                                                 </div>
                                             
                                             
                                             </form>
-                                            <div class="col-md-12">
+                                            <div class="col-md-12 ">
                                                     <button onclick="Buscar()" class="btn btn-primary">Buscar</button>
                                             </div>
 
@@ -140,7 +140,7 @@
                                                     
                                                         
                                                 
-                                                        <div class="col-md-12" hidden id="CapaCantidadDescuento">
+                                                        <div class="col-md-12 mb-3" hidden id="CapaCantidadDescuento">
                                                             <label for="inputCity" class="form-label">Descuento en Lempiras:</label>
                                                             <input type="number" class="form-control" id="descuento" >
                                                         </div>
@@ -241,6 +241,8 @@
 <script src="{{ asset('build/vendor/jquery/jquery.min.js')}}"></script>
 
 <script>
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
     let productoactual;
     let contadorf=0;
     let idcliente=0;
@@ -297,6 +299,9 @@
         $.ajax({
         method: "GET",
         url: urldinamica,
+        headers: {
+        'X-CSRF-TOKEN': csrfToken
+         }
         })
         .done(function( data ) {
             let response = JSON.parse(JSON.stringify(data));
@@ -348,6 +353,9 @@
             
             $.ajax({
             method: "GET",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
             url: "../../productoR/"+codigoproducto,
             })
             .done(function( data ) {
@@ -588,6 +596,9 @@
         
         $.ajax({
             method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
             url: "../../detalleVentaR/add",
             data: {
                 "venta_id": idorden,
@@ -630,6 +641,9 @@
       
         $.ajax({
             method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
             url: "../../ventaR/add",
             data: {
                 "fecha": strDate,
